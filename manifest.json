@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Ad Request Watcher",
+  "version": "0.1.0",
+  "description": "Locally records outgoing request domains and compares them with a bundled ad-server list.",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "cookies"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Ad Request Watcher",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.svg",
+      "32": "icon.svg",
+      "48": "icon.svg",
+      "128": "icon.svg"
+    }
+  },
+  "icons": {
+    "16": "icon.svg",
+    "32": "icon.svg",
+    "48": "icon.svg",
+    "128": "icon.svg"
+  }
+}

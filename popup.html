@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ad Request Watcher</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="brand">
+          <img src="icon.svg" alt="" width="28" height="28">
+          <div class="brand-copy">
+            <h1>Ad Request Watcher</h1>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="known-toggle" class="quiet-button" type="button" aria-expanded="false">Known servers</button>
+          <button id="clear" type="button">Clear</button>
+        </div>
+      </header>
+      <div id="summary" class="metrics" aria-label="Activity summary">
+        <span class="metric total"><b>—</b><small>Total</small></span>
+        <span class="metric known"><b>—</b><small>Known</small></span>
+        <span class="metric cookies"><b>—</b><small>Cookies</small></span>
+        <span class="metric trackers"><b>—</b><small>Trackers</small></span>
+      </div>
+      <section id="known-panel" class="known-panel" aria-labelledby="known-heading" hidden>
+        <h2 id="known-heading">Known ad servers</h2>
+        <button id="export-servers" type="button">Export for ad blocker</button>
+        <ul id="known-servers"></ul>
+      </section>
+      <section id="ad-section" class="chart-section" aria-labelledby="chart-heading">
+        <h2 id="chart-heading">Ad requests</h2>
+        <div id="site-chart" class="site-chart" aria-label="Ad request chart. Right-click to switch chart style." aria-live="polite"></div>
+      </section>
+      <section id="cookie-section" class="chart-section" aria-labelledby="cookie-chart-heading">
+        <h2 id="cookie-chart-heading">Cookies</h2>
+        <div id="cookie-chart" class="site-chart" aria-label="Cookie chart. Right-click to show or hide cookie URLs." aria-live="polite"></div>
+      </section>
+      <section aria-labelledby="recent-heading">
+        <button id="recent-toggle" class="section-toggle" type="button" aria-expanded="false" aria-controls="requests">
+          <span id="recent-heading">Recent requests</span>
+          <span aria-hidden="true">+</span>
+        </button>
+        <ul id="requests" aria-live="polite" hidden></ul>
+      </section>
+    </main>
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>
