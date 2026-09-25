@@ -20,6 +20,19 @@ function formatTime(timestamp) {
   });
 }
 
+function formatCount(value) {
+  if (value < 1000) return String(value);
+  const units = ["k", "m", "b", "t"];
+  let scaled = value;
+  let unitIndex = -1;
+  while (scaled >= 1000 && unitIndex < units.length - 1) {
+    scaled /= 1000;
+    unitIndex += 1;
+  }
+  const formatted = scaled >= 100 ? scaled.toFixed(0) : scaled.toFixed(1);
+  return `${formatted.replace(/\.0$/, "")}${units[unitIndex]}`;
+}
+
 let customServers = new Set();
 let chartMode = "pie";
 let cookieListVisible = false;
@@ -50,7 +63,7 @@ function renderCookiePie(requests) {
     list.className = "cookie-url-list";
     for (const [domain, count] of domains) {
       const item = document.createElement("li");
-      item.textContent = `${domain} (${count})`;
+      item.textContent = `${domain} (${formatCount(count)})`;
       item.title = domain;
       list.append(item);
     }
@@ -82,7 +95,7 @@ function renderCookiePie(requests) {
     label.textContent = domain;
     label.title = domain;
     const value = document.createElement("b");
-    value.textContent = String(count);
+    value.textContent = formatCount(count);
     row.append(value, color, label);
     legend.append(row);
   });
@@ -134,7 +147,7 @@ function renderSiteChart(requests) {
       const label = document.createElement("span");
       label.textContent = site;
       const value = document.createElement("b");
-      value.textContent = String(count);
+      value.textContent = formatCount(count);
       row.append(value, color, label);
       legend.append(row);
     });
@@ -153,7 +166,7 @@ function renderSiteChart(requests) {
     bar.style.width = `${Math.max(4, (count / max) * 100)}%`;
     bar.title = `${count} ad requests`;
     const value = document.createElement("b");
-    value.textContent = String(count);
+    value.textContent = formatCount(count);
     row.append(label, bar, value);
     chartElement.append(row);
   }
@@ -203,7 +216,7 @@ function render(requests) {
     trackerCount
   ];
   summaryElement.querySelectorAll("b").forEach((element, index) => {
-    element.textContent = String(metricValues[index]);
+    element.textContent = formatCount(metricValues[index]);
   });
   requestsElement.replaceChildren();
   renderSiteChart(relevantRequests);
