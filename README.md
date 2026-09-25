@@ -1,3 +1,4 @@
+##Built using copilot AI##
 # Ad Request Watcher
 
 Privacy-first Chrome Manifest V3 prototype for discovering ad-server requests.
